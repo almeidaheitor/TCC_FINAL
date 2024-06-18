@@ -1,0 +1,316 @@
+<body>
+    <header>
+        <div class="topo">
+            <img src="img/Assento.svg" alt="Menu" class="poltrona" id="menuButton" />
+            <div id="menu" class="menu">
+                <ul>
+                    <li><a href="sobre.html"><img src="img/FingerUp.svg" alt="Sobre nós">Sobre</a></li>
+                    <li><a href="fazemos.html"><img src="img/Pipoca.svg" alt="O que fazemos">O que Fazemos</a></li>
+                    <li><a href="contato.html"><img src="img/Microfone.svg" alt="">Contato</a></li>
+                </ul>
+            </div>
+            <a href="index.html"><img src="./img/Triángulo_equilátero.svg" alt="Início" class="triRotTopo" /></a>
+            <a href="login.php"><img src="img/Fita.svg" alt="Login" title="Login" width="50rem" class="login" /></a>
+        </div>
+    </header>
+    <script type="text/javascript" src="js/menu.js"></script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Author" content="Giovanna, Heitor" />
+    <meta name="Description" content="TCC - Seletor de Assento" />
+    <meta name="KeyWords" content="Assento, 3D, Cinema, Teatro, Estádio, Show" />
+    <link rel="shortcut icon" href="img/Assento.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/dash_adm.css" />
+    <title>Visio - Admin Dashboard</title>
+    <style>
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        .message-box {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 10px 0;
+            width: 80%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .message-box h3, .message-box h4 {
+            margin: 0;
+            padding: 0;
+        }
+        .message-box h3 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .message-box h4 {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .message-box p {
+            font-size: 1rem;
+            color: #333;
+            white-space: pre-wrap; /* Preserves line breaks */
+        }
+    </style>
+</head>
+
+<?php
+
+include('config.php');
+
+// Verifica se os dados foram enviados via POST
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Obtém os dados do formulário
+    $localizacao = $_POST['localizacao'];
+    $endereco = $_POST['endereco'];
+    $largura = $_POST['largura'];
+    $altura = $_POST['altura'];
+    $profundidade = $_POST['profundidade'];
+    $id_contato = $_POST['id_contato'];
+    $valor_medicao = $_POST['valor_medicao'];
+    $contra_proposta = $_POST['contra_proposta'];
+    $desconto = $_POST['desconto'];
+    $valor_final = $_POST['valor_final'];
+    $data_fim = $_POST['data_fim'];
+    $hora_fim = $_POST['hora_fim'];
+
+    // Prepara a consulta SQL para inserção
+    $query = "INSERT INTO modelagem (localizacao, endereco, largura, altura, profundidade, id_contato, valor_medicao, contra_proposta, desconto, valor_final, data_fim, hora_fim)
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+    if ($stmt = $conn->prepare($query)) {
+        $stmt->bind_param("ssdddidddsss", $localizacao, $endereco, $largura, $altura, $profundidade, $id_contato, $valor_medicao, $contra_proposta, $desconto, $valor_final, $data_fim, $hora_fim);
+        
+        if ($stmt->execute()) {
+            echo "<div class='form-container'><h2>Dados inseridos com sucesso!</h2>";
+            // Exibe os dados inseridos
+            echo "<div class='message-box'>";
+            echo "<p><strong>Localização:</strong> " . htmlspecialchars($localizacao) . "</p>";
+            echo "<p><strong>Endereço:</strong> " . htmlspecialchars($endereco) . "</p>";
+            echo "<p><strong>Largura:</strong> " . htmlspecialchars($largura) . "</p>";
+            echo "<p><strong>Altura:</strong> " . htmlspecialchars($altura) . "</p>";
+            echo "<p><strong>Profundidade:</strong> " . htmlspecialchars($profundidade) . "</p>";
+            echo "<p><strong>ID do Contato:</strong> " . htmlspecialchars($id_contato) . "</p>";
+            echo "<p><strong>Valor Medição:</strong> " . htmlspecialchars($valor_medicao) . "</p>";
+            echo "<p><strong>Contra Proposta:</strong> " . htmlspecialchars($contra_proposta) . "</p>";
+            echo "<p><strong>Desconto:</strong> " . htmlspecialchars($desconto) . "</p>";
+            echo "<p><strong>Valor Final:</strong> " . htmlspecialchars($valor_final) . "</p>";
+            echo "<p><strong>Data Fim:</strong> " . htmlspecialchars($data_fim) . "</p>";
+            echo "<p><strong>Hora Fim:</strong> " . htmlspecialchars($hora_fim) . "</p>";
+            echo "</div></div>";
+        } else {
+            echo "<div class='form-container'><h2>Erro ao inserir os dados:</h2> " . htmlspecialchars($stmt->error) . "</div>";
+        }
+        
+        $stmt->close();
+    } else {
+        echo "<div class='form-container'><h2>Erro na preparação da consulta:</h2> " . htmlspecialchars($conn->error) . "</div>";
+    }
+
+    // Fecha a conexão
+    $conn->close();
+}
+?>
+
+<button id="botaoDois" class="text-button"><a href="inserir_modelagem.php">Adicionar Dados</a></button>
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Author" content="Giovanna, Heitor" />
+    <meta name="Description" content="TCC - Seletor de Assento" />
+    <meta name="KeyWords" content="Assento, 3D, Cinema, Teatro, Estádio, Show" />
+    <link rel="shortcut icon" href="img/Assento.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/contact.css" />
+    <title>Visio - Contato</title>
+</head>
+<body>
+    <header>
+        <div class="topo">
+            <img src="img/Assento.svg" alt="Menu" class="poltrona" id="menuButton" />
+            <div id="menu" class="menu">
+                <ul>
+                    <li><a href="sobre.html"><img src="img/FingerUp.svg" alt="Sobre nós">Sobre</a></li>
+                    <li><a href="fazemos.html"><img src="img/Pipoca.svg" alt="O que fazemos">O que Fazemos</a></li>
+                    <li><a href="contato.html"><img src="img/Microfone.svg" alt="">Contato</a></li>
+                </ul>
+            </div>
+            <a href="index.html"><img src="./img/Triángulo_equilátero.svg" alt="Início" class="triRotTopo" /></a>
+            <a href="login.php"><img src="img/Fita.svg" alt="Login" title="Login" width="50rem" class="login" /></a>
+        </div>
+    </header>
+    <main class="form-body">
+        <div class="contact-form">
+            <h2>Contato</h2>
+            <form action="conn_contato.php" method="post">
+                <label for="name">Nome:</label>
+                <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Digite seu email" required>
+                <label for="subject">Assunto:</label>
+                <input type="text" id="assunto" name="assunto" placeholder="Digite o assunto" required>
+                <label for="message">Mensagem:</label>
+                <textarea id="mensagem" name="mensagem" rows="4" placeholder="Digite a mensagem" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+            
+        </div>
+        
+    </main>
+    <script type="text/javascript" src="js/menu.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Author" content="Giovanna, Heitor" />
+    <meta name="Description" content="TCC - Seletor de Assento" />
+    <meta name="KeyWords" content="Assento, 3D, Cinema, Teatro, Estádio, Show" />
+    <link rel="shortcut icon" href="img/Assento.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/dash_adm.css" />
+    <title>Visio - Admin Dashboard</title>
+    <style>
+        .message-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+        .message-box {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 10px 0;
+            width: 80%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .message-box h3, .message-box h4 {
+            margin: 0;
+            padding: 0;
+        }
+        .message-box h3 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .message-box h4 {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .message-box p {
+            font-size: 1rem;
+            color: #333;
+            white-space: pre-wrap; /* Preserves line breaks */
+        }
+        .delete-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #FF0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .delete-button:hover {
+            background-color: #CC0000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="topo">
+            <img src="img/Assento.svg" alt="Menu" class="poltrona" id="menuButton" />
+            <div id="menu" class="menu">
+                <ul>
+                    <li><a href="sobre.html"><img src="img/FingerUp.svg" alt="Sobre nós">Sobre</a></li>
+                    <li><a href="fazemos.html"><img src="img/Pipoca.svg" alt="O que fazemos">O que Fazemos</a></li>
+                    <li><a href="contato.html"><img src="img/Microfone.svg" alt="">Contato</a></li>
+                </ul>
+            </div>
+            <a href="index.html"><img src="./img/Triángulo_equilátero.svg" alt="Início" class="triRotTopo" /></a>
+            <a href="login.php"><img src="img/Fita.svg" alt="Login" title="Login" width="50rem" class="login" /></a>
+        </div>
+    </header>
+    <main>
+        <div class="message-container">
+            <h2>Mensagens de Contato</h2>
+            <?php include('fetch_messages.php'); ?>
+        </div>
+    </main>
+    <script type="text/javascript" src="js/menu.js"></script>
+</body>
+</html>
+
+
+
+
+<label for="cidade">Cidade</label>
+        <select id="cidade" name="cidade">
+          <option value="vazio" selected></option>
+          <option value="Hig">São Paulo</option>
+          <option value="VL">Rio de Janeiro</option>
+          <option value="Sant">Pernambuco</option>
+        </select>
+
+        loginprocess
+        <?php
+session_start();
+include('config.php');
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $sql = "SELECT id, nome, senha FROM usuarios2 WHERE email = '$email'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        if (password_verify($password, $row['senha'])) {
+            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['user_nome'] = $row['nome'];
+            echo "Login bem-sucedido! Bem-vindo, " . $row['nome'];
+            // Redirecionar para uma página protegida ou dashboard
+            header("Location: seletorSala.html");
+        } else {
+            echo "Senha incorreta.";
+        }
+    } else {
+        echo "Nenhuma conta encontrada com esse email.";
+    }
+
+    $conn->close();
+}
+
+
+
+<?php include('fetch_precif_usuario.php'); ?>

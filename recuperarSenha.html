@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Author" content="Giovanna, Heitor" />
+    <meta name="Description" content="TCC - Seletor de Assento" />
+    <meta
+      name="KeyWords"
+      content="Assento, 3D, Cinema, Teatro, Estádio, Show"
+    />
+    <link rel="shortcut icon" href="img/Assento.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <title>Visio - Recuperar Senha</title>
+</head>
+<body>
+    <header>
+        <div class="topo">
+          <img
+            src="img/Assento.svg"
+            alt="Menu"
+            class="poltrona"
+            id="menuButton"
+          />
+          <div id="menu" class="menu">
+            <ul>
+              <li><a href="sobre.html"><img src="img/FingerUp.svg" alt="Sobre nós">Sobre</a></li>
+              <li><a href="fazemos.html"><img src="img/Pipoca.svg" alt="O que fazemos">O que Fazemos</a></li>
+              <li><a href="contato.html"><img src="img/Microfone.svg" alt="">Contato</a></li>
+            </ul>
+          </div>
+          <a href="login.php"
+            ><img
+              src="img/Fita.svg"
+              alt="Login"
+              title="Login"
+              width="50rem"
+              class="login"
+          /></a>
+        </div>
+      </header>
+      <main class="tela-login">
+        <h1 class="login">Recuperar Senha</h1>
+        <br>
+        <div>
+            <input type="email" placeholder="Digite seu email aqui" class="inputs required"
+                oninput="emailValidate()">
+        </div>
+        <br>
+        <button class="text-button" onclick="alerta()">Enviar</button>
+      </main>
+      <script type="text/javascript" src="js/recuperarSenha.js"></script>
+      <script type="text/javascript" src="js/menu.js"></script>
+</body>
+</html>

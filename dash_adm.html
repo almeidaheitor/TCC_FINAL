@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Author" content="Giovanna, Heitor" />
+    <meta name="Description" content="TCC - Seletor de Assento" />
+    <meta name="KeyWords" content="Assento, 3D, Cinema, Teatro, Estádio, Show" />
+    <link rel="shortcut icon" href="img/Assento.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/contact.css" />
+    <title>Visio - Adm</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+        button {
+            background-color: var(--main-color);
+            color: #fff;
+            padding: 50px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: var(--main-font);
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 200px;
+            height: 200px;
+            text-decoration: none;
+        }
+        button a {
+            color: #fff;
+            text-decoration: none;
+        }
+        button:hover {
+            background-color: darken(var(--main-color), 10%);
+        }
+        .triRotTopo {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <a href="paginaInicial.html"><img src="img/Triángulo_equilátero.svg" alt="Início" class="triRotTopo" /></a>
+    </div> 
+
+    <div class="container">
+        <button id="botaoUm" class="text-button"><a href="dash_mensagens.php">Mensagens</a></button>
+        <button id="botaoDois" class="text-button"><a href="inserir_modelagem.php">Adicionar Modelagem</a></button>
+        <button id="botaoDois" class="text-button"><a href="modelagem.php">Modelagem</a></button>
+        <button id="botaoDois" class="text-button"><a href="inserir_dados.html">Adicionar Precificação</a></button>
+        <button id="botaoDois" class="text-button"><a href="precificacao.php">Precificação</a></button>
+    </div>
+</body>
+</html>

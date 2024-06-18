@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Author" content="Giovanna, Heitor" />
+    <meta name="Description" content="TCC - Seletor de Assento" />
+    <meta name="KeyWords" content="Assento, 3D, Cinema, Teatro, Estádio, Show" />
+    <link rel="shortcut icon" href="img/Assento.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/contact.css" />
+    <title>Visio - Contato</title>
+</head>
+<body>
+    <header>
+        <div class="topo">
+            <img src="img/Assento.svg" alt="Menu" class="poltrona" id="menuButton" />
+            <div id="menu" class="menu">
+                <ul>
+                    <li><a href="sobre.html"><img src="img/FingerUp.svg" alt="Sobre nós">Sobre</a></li>
+                    <li><a href="fazemos.html"><img src="img/Pipoca.svg" alt="O que fazemos">O que Fazemos</a></li>
+                    <li><a href="contato.html"><img src="img/Microfone.svg" alt="">Contato</a></li>
+                </ul>
+            </div>
+            <a href="paginaInicial.html"><img src="img/Triángulo_equilátero.svg" alt="Início" class="triRotTopo" /></a>
+            <a href="login.php"><img src="img/Fita.svg" alt="Login" title="Login" width="50rem" class="login" /></a>
+        </div>
+    </header>
+    <main class="form-body">
+        <div class="contact-form">
+            <h2>Contato</h2>
+            <form id="contactForm">
+                <label for="name">Nome:</label>
+                <input type="text" id="nome" name="nome" placeholder="Digite seu nome" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Digite seu email" required>
+                <label for="subject">Assunto:</label>
+                <input type="text" id="assunto" name="assunto" placeholder="Digite o assunto" required>
+                <label for="message">Mensagem:</label>
+                <textarea id="mensagem" name="mensagem" rows="4" placeholder="Digite a mensagem" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+            <div id="responseMessage" style="display: none;"></div>
+        </div>
+    </main>
+    <script type="text/javascript" src="js/menu.js"></script>
+    <script type="text/javascript">
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            fetch('conn_contato.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('responseMessage').innerText = 'Mensagem enviada com sucesso!';
+                document.getElementById('responseMessage').style.color = 'green';
+                document.getElementById('responseMessage').style.display = 'block';
+                document.getElementById('contactForm').reset();
+            })
+            .catch(error => {
+                document.getElementById('responseMessage').innerText = 'Ocorreu um erro ao enviar a mensagem. Tente novamente mais tarde.';
+                document.getElementById('responseMessage').style.color = 'red';
+                document.getElementById('responseMessage').style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="Author" content="Giovanna, Heitor" />
+    <meta name="Description" content="TCC - Seletor de Assento" />
+    <meta
+      name="KeyWords"
+      content="Assento, 3D, Cinema, Teatro, Estádio, Show"
+    />
+    <link rel="shortcut icon" href="img/Assento.svg" type="image/x-icon" />
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>Visio - Seletor de Sala</title>
+</head>
+<body>
+    <h2>Seleção de Sala</h2>
+    <div class="conteudo">
+      <form action="#" id="container">
+        <label for="estado">Estado</label>
+        <select id="estado" name="estado" placeholder="Estado">
+          <option></option>
+        </select>
+        <label for="cidade">Cidade</label>
+        <select id="cidade" name="cidade">
+          <option></option>
+        </select>
+        <label for="shop">Shopping</label>
+        <select id="shop" name="shop">
+          <option value="vazio" selected></option>
+          <option value="Hig">Higienópolis</option>
+          <option value="VL">Villa Lobos</option>
+          <option value="Sant">Santana</option>
+        </select>
+        <input type="submit" value="Enviar" />
+      </form>
+      <iframe
+        src="http://192.168.0.6:8080/"
+        frameborder="0"
+        width="720"
+        height="640"
+        frameborder="0"
+        scrolling="no"
+        marginheight="0"
+        marginwidth="0" ></iframe>
+  
+      <script src="js/seletor.js"></script>
+
+      <button type="submit" class="text-button"><a href="view_projects.php">Adicionar Dados</a></button>
+    </div>
+    
+</body>
+</html>
